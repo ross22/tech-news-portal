@@ -1,0 +1,24 @@
+<div class="page-shell">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Signal home"><span class="brand-mark">s</span><span>signal<span class="brand-dot">.</span></span></a>
+    <nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="#latest">Discover</a><a class="nav-link" href="#latest">Latest</a><a class="nav-link" href="#briefing">Briefing</a></nav>
+    <div class="top-actions"><label class="search-box"><span class="search-icon" aria-hidden="true">⌕</span><input type="search" placeholder="Search stories..." aria-label="Search stories" (input)="onSearch($any($event.target).value)" /><kbd>⌘ K</kbd></label><button class="subscribe-button" type="button">Get the daily brief <span aria-hidden="true">↗</span></button><button class="menu-button" type="button" aria-label="Open menu">☰</button></div>
+  </header>
+
+  <main id="top" class="content-wrap">
+    <section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><p class="eyebrow"><span class="live-dot"></span> THE SIGNAL, TODAY</p><h1 id="hero-title">Tech moves<br />fast. <em>Stay curious.</em></h1><p class="hero-intro">The ideas, people, and breakthroughs shaping what comes next — thoughtfully reported, minus the noise.</p><a class="hero-link" href="#latest">Explore today's stories <span aria-hidden="true">↓</span></a></div><div class="hero-art" role="img" aria-label="Abstract glowing digital network illustration"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-orbit orbit-three"></div><div class="art-core"><span></span><span></span><span></span></div><div class="art-label"><span class="live-dot"></span> SIGNAL / 001</div><div class="art-caption">A clearer view<br />of what's next.</div></div></section>
+
+    <section class="ticker" aria-label="Trending topics"><span class="ticker-label">TRENDING NOW</span><a href="#latest">AI agents <span>↗</span></a><i></i><a href="#latest">The new space race <span>↗</span></a><i></i><a href="#latest">On-device AI <span>↗</span></a><i></i><a href="#latest">Climate tech <span>↗</span></a></section>
+
+    <section id="latest" class="latest-section"><div class="section-heading"><div><p class="eyebrow">YOUR DAILY CATCH-UP</p><h2>Latest stories<span class="heading-period">.</span></h2></div><a class="view-all" href="#latest">View all stories <span aria-hidden="true">→</span></a></div>
+      <div class="category-row" aria-label="Filter stories by category">@for (category of categories; track category) {<button type="button" class="category-chip" [class.selected]="selectedCategory() === category" (click)="selectCategory(category)">{{ category }}</button>}</div>
+      @if (articles$ | async; as articles) {
+        @if (articles.length) {<div class="article-grid">@for (article of articles; track article.id; let index = $index) {<article class="article-card" [class.featured-card]="index === 0" [class]="'article-card accent-' + article.accent"><a class="article-card-link" [routerLink]="['/stories', article.id]" [attr.aria-label]="'Read: ' + article.title"><div class="card-visual"><span class="visual-kicker">{{ article.tag }}</span><div class="visual-shape shape-{{ article.accent }}"><span></span><span></span><span></span></div><span class="visual-index">0{{ article.id }}</span></div><div class="card-body"><div class="article-meta"><span>{{ article.category }}</span><span class="meta-dot">·</span><span>{{ article.publishedAt }}</span></div><h3>{{ article.title }}</h3><p class="article-summary">{{ article.summary }}</p></div></a><div class="card-body card-footer-wrap"><div class="card-footer"><span class="author-avatar">{{ article.author.charAt(0) }}</span><span class="author-name">{{ article.author }}</span><span class="read-time">{{ article.readTime }}</span><button type="button" class="bookmark-button" [attr.aria-label]="'Save ' + article.title">＋</button></div></div></article>}</div>}
+        @else {<div class="empty-state"><span>⌕</span><h3>No stories found</h3><p>Try another search or choose a different topic.</p></div>}
+      } @else {<div class="loading-state"><span class="spinner"></span><p>Finding the stories worth your time...</p></div>}
+    </section>
+
+    <section id="briefing" class="briefing-banner"><div><p class="eyebrow">A LITTLE SIGNAL IN YOUR INBOX</p><h2>Make sense of<br />what's next.</h2></div><p>One thoughtful briefing, every weekday morning. The context behind the headlines, delivered simply.</p><button type="button">Get the daily brief <span>→</span></button></section>
+    <footer class="site-footer"><a class="brand footer-brand" href="#top"><span class="brand-mark">s</span><span>signal<span class="brand-dot">.</span></span></a><span>Independent perspective on a world in motion.</span><span>© 2026 Signal Media</span></footer>
+  </main>
+</div>

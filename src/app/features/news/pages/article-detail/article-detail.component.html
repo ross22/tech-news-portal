@@ -1,0 +1,24 @@
+<div class="detail-page">
+  <header class="detail-header">
+    <a class="brand" routerLink="/discover" aria-label="Signal home"><span class="brand-mark">s</span><span>signal<span class="brand-dot">.</span></span></a>
+    <a class="back-link" routerLink="/discover"><span aria-hidden="true">←</span> Back to stories</a>
+  </header>
+
+  @if (article$ | async; as article) {
+    <main class="story-content">
+      <a class="back-mobile" routerLink="/discover">← All stories</a>
+      <div class="story-heading">
+        <p class="eyebrow"><span>{{ article.category }}</span><i>·</i>{{ article.publishedAt }}</p>
+        <h1>{{ article.title }}</h1>
+        <p class="story-deck">{{ article.summary }}</p>
+        <div class="byline"><span class="author-avatar">{{ article.author.charAt(0) }}</span><span>By <strong>{{ article.author }}</strong></span><i>·</i><span>{{ article.readTime }}</span><button type="button" class="save-button">＋ Save story</button></div>
+      </div>
+
+      <div class="story-art accent-{{ article.accent }}" role="img" [attr.aria-label]="article.tag + ' illustration'"><span class="art-tag">{{ article.tag }}</span><div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div><div class="art-orbit orbit-c"></div><div class="art-core"><span></span><span></span><span></span></div><span class="art-number">SIGNAL / 00{{ article.id }}</span></div>
+
+      <article class="story-body"><p class="drop-cap">{{ article.summary }}</p><h2>The bigger picture</h2><p>{{ article.title }} is part of a broader shift across {{ article.category.toLowerCase() }}. The technology is changing quickly, but the questions that matter are practical: who benefits, what changes in daily life, and what still needs to be solved?</p><p>{{ article.summary }} That context helps explain why this story matters beyond today's headline.</p><blockquote>“The most useful technology is the kind that gives people more room to do meaningful work.”</blockquote><h2>What to watch next</h2><p>Over the coming months, keep an eye on how teams put these ideas into practice. The next chapter will be shaped by real-world results, thoughtful design, and the people who choose to use it.</p><a class="return-link" routerLink="/discover">← Find your next story</a></article>
+    </main>
+  } @else {
+    <main class="not-found"><span class="not-found-mark">?</span><p class="eyebrow">STORY NOT FOUND</p><h1>This story has moved on.</h1><p>Head back to the latest stories and find something new to explore.</p><a class="return-link" routerLink="/discover">← Back to stories</a></main>
+  }
+</div>
